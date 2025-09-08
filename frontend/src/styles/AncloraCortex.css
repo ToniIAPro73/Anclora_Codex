@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Paleta base Anclora - Exacta del Design System v5.0 */
+  --azul-principal: #23436B;
+  --azul-claro: #2EAFC4;
+  --ambar-suave: #FFC979;
+  --negro-azulado: #162032;
+  --gris-claro: #F6F7F9;
+  --blanco: #FFFFFF;
+  
+  /* Colores adicionales del ecosistema */
+  --azul-hero: #38BDF8;
+  --verde-guardian: #D6F8E3;
+  --gris-render: #37475A;
+  --teal-kairon: #37B5A4;
+  
+  /* Degradados oficiales Anclora */
+  --gradient-hero: linear-gradient(120deg, #23436B 0%, #2EAFC4 100%);
+  --gradient-action: linear-gradient(90deg, #2EAFC4 0%, #FFC979 100%);
+  --gradient-subtle: linear-gradient(180deg, #F6F7F9 0%, #FFFFFF 100%);
+  --gradient-cortex: linear-gradient(120deg, #23436B 0%, #2EAFC4 100%);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--negro-azulado);
+  background-color: var(--blanco);
+  overflow-x: hidden;
+}
+
+.font-libre { 
+  font-family: 'Libre Baskerville', serif; 
+}
+
+.font-mono { 
+  font-family: 'JetBrains Mono', monospace; 
+}
+
+.hero-gradient { 
+  background: var(--gradient-hero); 
+}
+
+.action-gradient { 
+  background: var(--gradient-action); 
+}
+
+.subtle-gradient { 
+  background: var(--gradient-subtle); 
+}
+
+.text-azul-principal {
+  color: var(--azul-principal);
+}
+
+.text-azul-claro {
+  color: var(--azul-claro);
+}
+
+.text-ambar-suave {
+  color: var(--ambar-suave);
+}
+
+.text-negro-azulado {
+  color: var(--negro-azulado);
+}
+
+.bg-gris-claro {
+  background-color: var(--gris-claro);
+}
+
+.bg-negro-azulado {
+  background-color: var(--negro-azulado);
+}
+
+.border-azul-principal {
+  border-color: var(--azul-principal);
+}
+
+.feature-card {
+  background: var(--blanco);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #E1E8ED;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(46, 175, 196, 0.2);
+  border-color: var(--azul-claro);
+}
+
+.workflow-step {
+  background: var(--blanco);
+  border-left: 4px solid var(--ambar-suave);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0 12px 12px 0;
+}
+
+.pricing-card {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.pricing-card.popular {
+  border-color: var(--azul-claro);
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(46, 175, 196, 0.2);
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.pricing-card.popular:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+
+/* Animaciones suaves */
+.transition {
+  transition: all 0.3s ease;
+}
+
+/* Efectos de hover para botones - Estilo Anclora */
+.action-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(46, 175, 196, 0.4);
+}
+
+/* Botones con estilo Anclora */
+.btn-anclora {
+  background: var(--gradient-action);
+  color: var(--negro-azulado);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(46, 175, 196, 0.3);
+}
+
+.btn-anclora:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 175, 196, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feature-card {
+    padding: 1.5rem;
+  }
+  
+  .pricing-card.popular {
+    transform: none;
+  }
+  
+  .pricing-card.popular:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus states for accessibility */
+button:focus,
+input:focus {
+  outline: 2px solid var(--azul-claro);
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+}
