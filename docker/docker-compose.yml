@@ -4,13 +4,15 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - SUPABASE_URL=${SUPABASE_URL}
-      - SUPABASE_KEY=${SUPABASE_KEY}
-      - SECRET_KEY=${SECRET_KEY}
+      - SUPABASE_URL=${SUPABASE_URL:-https://wygyxqvflvjeeonifiad.supabase.co}
+      - SUPABASE_KEY=${SUPABASE_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5Z3l4cXZmbHZqZWVvbmlmaWFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTczNTQwMDcsImV4cCI6MjA3MjkzMDAwN30.LiD0cCR1bdqV5knwzmD3DVIRnBj9ZG9lJT1GRayaJ4s}
+      - SECRET_KEY=${SECRET_KEY:-d1d2b39b76a19ccb96d49f5ec3d5f720ccd1e37405317fb19301e0a67374e3f2}
+      - DATABASE_URL=postgresql://anclora:password@db:5432/anclora_cortex
     volumes:
       - ../backend:/app
     depends_on:
       - db
+    restart: unless-stopped
 
   frontend:
     build: ../frontend
@@ -33,6 +35,12 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U anclora -d anclora_cortex"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
 
 volumes:
   postgres_data:  
