@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anclora Press - Plataforma de Análisis de Negocio con IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-principal: #23436B;
+            --ambar-suave: #FFC979;
+            --ambar-claro: #FFECB3;
+            --gris-fondo: #F6F7F9;
+            --azul-oscuro: #162032;
+            --texto-claro: #FFFFFF;
+            
+            /* Sistema de espaciado 8pt */
+            --espacio-1: 8px;
+            --espacio-2: 16px;
+            --espacio-3: 24px;
+            --espacio-4: 32px;
+            --espacio-5: 40px;
+            --espacio-6: 48px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.625;
+            color: var(--azul-oscuro);
+            background-color: var(--gris-fondo);
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacio-3);
+        }
+        
+        /* Cabecera */
+        header {
+            background-color: var(--azul-principal);
+            color: var(--texto-claro);
+            padding: var(--espacio-3) 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--espacio-2);
+        }
+        
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+        
+        .logo-text {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: var(--espacio-2);
+        }
+        
+        .btn {
+            padding: var(--espacio-2) var(--espacio-3);
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--ambar-suave);
+            color: var(--azul-oscuro);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--ambar-claro);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 201, 121, 0.3);
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(120deg, var(--azul-principal) 0%, var(--azul-oscuro) 100%);
+            color: var(--texto-claro);
+            padding: var(--espacio-6) 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: 3.75rem;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            margin-bottom: var(--espacio-3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto var(--espacio-4);
+            opacity: 0.9;
+        }
+        
+        .hero-quote {
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--ambar-suave);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Sección de introducción */
+        .intro {
+            padding: var(--espacio-6) 0;
+            background-color: var(--texto-claro);
+        }
+        
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: var(--espacio-3);
+        }
+        
+        .intro-description {
+            margin-bottom: var(--espacio-4);
+        }
+        
+        .intro-description strong {
+            color: var(--azul-principal);
+        }
+        
+        .intro-description em {
+            color: var(--ambar-suave);
+            font-style: italic;
+        }
+        
+        .intro-quote {
+            background-color: var(--gris-fondo);
+            border-left: 4px solid var(--ambar-suave);
+            padding: var(--espacio-3);
+            margin: var(--espacio-4) 0;
+            font-style: italic;
+            color: var(--azul-oscuro);
+        }
+        
+        /* Sección de funcionalidades */
+        .features {
+            padding: var(--espacio-6) 0;
+            background-color: var(--gris-fondo);
+        }
+        
+        .section-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            color: var(--azul-oscuro);
+            text-align: center;
+            margin-bottom: var(--espacio-5);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--espacio-4);
+        }
+        
+        .feature-card {
+            background-color: var(--texto-claro);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            background-color: var(--azul-principal);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .feature-content {
+            padding: var(--espacio-3);
+        }
+        
+        .feature-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.3rem;
+            margin-bottom: var(--espacio-2);
+            color: var(--azul-oscuro);
+        }
+        
+        /* Sección de análisis */
+        .analysis {
+            padding: var(--espacio-6) 0;
+            background-color: var(--texto-claro);
+        }
+        
+        .analysis-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--espacio-4);
+        }
+        
+        .analysis-section {
+            background-color: var(--gris-fondo);
+            border-radius: 12px;
+            padding: var(--espacio-3);
+        }
+        
+        .analysis-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            margin-bottom: var(--espacio-3);
+            color: var(--azul-principal);
+        }
+        
+        .chart-placeholder {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--azul-principal);
+            font-weight: 500;
+            margin-bottom: var(--espacio-3);
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--espacio-2);
+        }
+        
+        .metric-card {
+            background-color: var(--texto-claro);
+            border-radius: 8px;
+            padding: var(--espacio-2);
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--azul-principal);
+            margin-bottom: var(--espacio-1);
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--azul-oscuro);
+            opacity: 0.8;
+        }
+        
+        /* Sección de informes */
+        .reports {
+            padding: var(--espacio-6) 0;
+            background-color: var(--gris-fondo);
+        }
+        
+        .report-card {
+            background-color: var(--texto-claro);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .report-header {
+            background-color: var(--azul-principal);
+            color: var(--texto-claro);
+            padding: var(--espacio-2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .report-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.2rem;
+        }
+        
+        .report-content {
+            padding: var(--espacio-3);
+        }
+        
+        .report-item {
+            display: flex;
+            align-items: center;
+            padding: var(--espacio-2) 0;
+            border-bottom: 1px solid var(--gris-fondo);
+        }
+        
+        .report-item:last-child {
+            border-bottom: none;
+        }
+        
+        .report-icon {
+            background-color: var(--ambar-suave);
+            color: var(--azul-oscuro);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--espacio-2);
+            flex-shrink: 0;
+        }
+        
+        /* Principios de aplicación */
+        .principles {
+            padding: var(--espacio-6) 0;
+            background-color: var(--texto-claro);
+        }
+        
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--espacio-3);
+        }
+        
+        .principle-card {
+            background-color: var(--gris-fondo);
+            border-radius: 12px;
+            padding: var(--espacio-3);
+            transition: all 0.2s ease;
+        }
+        
+        .principle-card:hover {
+            background-color: var(--ambar-claro);
+            transform: translateY(-3px);
+        }
+        
+        .principle-icon {
+            font-size: 2rem;
+            margin-bottom: var(--espacio-2);
+            color: var(--azul-principal);
+        }
+        
+        .principle-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.2rem;
+            margin-bottom: var(--espacio-2);
+            color: var(--azul-oscuro);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--azul-oscuro);
+            color: var(--texto-claro);
+            padding: var(--espacio-4) 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .palette-mini {
+            display: flex;
+            gap: var(--espacio-1);
+            margin: var(--espacio-2) 0;
+        }
+        
+        .palette-mini span {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .color-1 { background-color: #23436B; }
+        .color-2 { background-color: #FFC979; }
+        .color-3 { background-color: #FFECB3; }
+        .color-4 { background-color: #F6F7F9; }
+        .color-5 { background-color: #162032; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .analysis-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabecera -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">📝</div>
+                <div class="logo-text">Anclora Press</div>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary">Iniciar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">Anclora Cortex</h1>
+            <p class="hero-subtitle">Plataforma de análisis de negocio impulsada por IA, diseñada para ejecutarse localmente mediante contenedores Docker.</p>
+            <div class="hero-quote">"Escribe una vez. Publica perfecto en todas partes"</div>
+        </div>
+    </section>
+
+    <!-- Sección de introducción -->
+    <section class="intro">
+        <div class="container intro-content">
+            <p class="intro-text">En un mar de ruido y herramientas desconectadas, Anclora ofrece el punto de anclaje.</p>
+            <p class="intro-description">Diseñamos con <strong>calma competente</strong> y <em>pragmatismo empático</em>: lo esencial por encima del adorno. Nuestra filosofía se refleja en cada pixel, cada interacción y cada decisión de diseño.</p>
+            <div class="intro-quote">
+                "No prometemos cambiar tu vida. Prometemos devolverte el control sobre tu trabajo."
+            </div>
+            <button class="btn btn-primary" style="width: 100%;">Comenzar Análisis con IA</button>
+        </div>
+    </section>
+
+    <!-- Sección de funcionalidades -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Funcionalidades Clave</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: var(--texto-claro);">📝</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">Editor visual avanzado</h3>
+                        <p>Crea y edita contenido con una interfaz intuitiva que prioriza la claridad y la eficiencia en el flujo de trabajo.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: var(--texto-claro);">🔍</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">Búsqueda semántica</h3>
+                        <p>Navega por tus documentos con una búsqueda inteligente que entiende el contexto y las relaciones entre conceptos.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: var(--texto-claro);">📊</div>
+                    <div class="feature-content">
+                        <h3 class="feature-title">Análisis predictivo</h3>
+                        <p>Obtén insights valiosos sobre tu negocio con modelos de IA que analizan tendencias y proyectan escenarios futuros.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de análisis -->
+    <section class="analysis">
+        <div class="container">
+            <h2 class="section-title">Análisis de Negocio con IA</h2>
+            <div class="analysis-container">
+                <div class="analysis-section">
+                    <h3 class="analysis-title">Visión General del Negocio</h3>
+                    <div class="chart-placeholder">
+                        Visualización de métricas clave del negocio
+                    </div>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value">+24%</div>
+                            <div class="metric-label">Crecimiento</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">87%</div>
+                            <div class="metric-label">Satisfacción</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">15.2K</div>
+                            <div class="metric-label">Ventas</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">4.3</div>
+                            <div class="metric-label">ROI</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="analysis-section">
+                    <h3 class="analysis-title">Flujo de Trabajo</h3>
+                    <ul style="margin: 0 0 var(--espacio-3); padding-left: var(--espacio-3);">
+                        <li style="margin-bottom: var(--espacio-2);">1. Recolección de datos</li>
+                        <li style="margin-bottom: var(--espacio-2);">2. Análisis con IA especializada</li>
+                        <li style="margin-bottom: var(--espacio-2);">3. Generación de insights</li>
+                        <li style="margin-bottom: var(--espacio-2);">4. Consolidación de resultados</li>
+                        <li style="margin-bottom: var(--espacio-2);">5. Generación de planes de mejora</li>
+                    </ul>
+                    
+                    <h3 class="analysis-title" style="margin-top: var(--espacio-4);">Indicadores de Éxito</h3>
+                    <ul style="margin: 0; padding-left: var(--espacio-3);">
+                        <li style="margin-bottom: var(--espacio-2);">• Métricas para medir progreso</li>
+                        <li style="margin-bottom: var(--espacio-2);">• Objetivos alcanzables</li>
+                        <li style="margin-bottom: var(--espacio-2);">• Seguimiento en tiempo real</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de informes -->
+    <section class="reports">
+        <div class="container">
+            <h2 class="section-title">Informes y Documentación</h2>
+            <div class="report-card">
+                <div class="report-header">
+                    <div class="report-title">Últimos Informes Generados</div>
+                    <button class="btn" style="background-color: var(--ambar-suave); color: var(--azul-oscuro); padding: 4px 12px; font-size: 0.9rem;">Descargar Todo</button>
+                </div>
+                <div class="report-content">
+                    <div class="report-item">
+                        <div class="report-icon">📊</div>
+                        <div>
+                            <div style="font-weight: 500;">Análisis de Tendencias Q3</div>
+                            <div style="font-size: 0.85rem; opacity: 0.8;">Generado el 15 de septiembre de 2023</div>
+                        </div>
+                    </div>
+                    <div class="report-item">
+                        <div class="report-icon">📈</div>
+                        <div>
+                            <div style="font-weight: 500;">Proyección de Ventas 2024</div>
+                            <div style="font-size: 0.85rem; opacity: 0.8;">Generado el 10 de septiembre de 2023</div>
+                        </div>
+                    </div>
+                    <div class="report-item">
+                        <div class="report-icon">📝</div>
+                        <div>
+                            <div style="font-weight: 500;">Análisis de Satisfacción del Cliente</div>
+                            <div style="font-size: 0.85rem; opacity: 0.8;">Generado el 5 de septiembre de 2023</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Principios de aplicación -->
+    <section class="principles">
+        <div class="container">
+            <h2 class="section-title">Principios de Aplicación</h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: var(--espacio-4);">Reglas para mantener consistencia en todo el ecosistema</p>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">▤</div>
+                    <h3 class="principle-title">Sistema de Grid y Espaciado</h3>
+                    <p>Sistema de grid de 8 puntos (8pt) para consistencia visual: espaciado entre párrafos: 16px (2 × 8px), padding interno de tarjetas: 24px (3 × 8px).</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon">Aa</div>
+                    <h3 class="principle-title">Jerarquía Tipográfica</h3>
+                    <p>Usa Libre Baskerville para títulos y Inter para texto normal. Mantén una línea base clara y legible para mejorar la experiencia de lectura.</p>
+                </div>
+                <div class="principle-card">
+                    <div class="principle-icon" style="color: var(--ambar-suave);">🎨</div>
+                    <h3 class="principle-title">Paleta de Colores</h3>
+                    <p>Utiliza la paleta específica de Anclora Press: #23436B, #FFC979, #FFECB3, #F6F7F9, #162032 para mantener coherencia visual en toda la aplicación.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="palette-mini">
+                <span class="color-1"></span>
+                <span class="color-2"></span>
+                <span class="color-3"></span>
+                <span class="color-4"></span>
+                <span class="color-5"></span>
+            </div>
+            <p>Plataforma de Análisis de Negocio con IA - Anclora Cortex</p>
+            <p style="opacity: 0.8; margin-top: var(--espacio-1);">Diseñado para ejecutarse localmente con Docker • Impulsado por agentes de IA especializados</p>
+        </div>
+    </footer>
+</body>
+</html>
