@@ -23,7 +23,7 @@ import {
   faFileAlt,
   faStar
 } from '@fortawesome/free-solid-svg-icons'
-import '../styles/AncloraCortex.css'
+import ThemeSelector from './ThemeSelector'
 
 const AncloraCortex = () => {
   const [showLogin, setShowLogin] = useState(false)
@@ -150,17 +150,18 @@ const AncloraCortex = () => {
   }
 
   return (
-    <div className="anclora-cortex min-h-screen bg-white">
+    <div className="anclora-cortex min-h-screen">
+      {/* Theme Selector */}
+      <ThemeSelector />
       {/* Navigation */}
-      <nav className="bg-white shadow-sm fixed w-full z-50 border-b border-border-subtle">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <span className="text-2xl font-libre font-bold text-azul-principal">⚓ Anclora Cortex</span>
-              <span className="ml-2 text-sm bg-gradient-press text-negro-azulado px-2 py-1 rounded-full font-medium">
-                Beta
-              </span>
-            </div>
+      <nav>
+        <div className="nav-container">
+          <div className="nav-logo">
+            ⚓ Anclora Cortex
+            <span className="ml-2 text-sm px-2 py-1 rounded-full font-medium" style={{background: 'var(--anclora-amber)', color: 'var(--anclora-navy)'}}>
+              Beta
+            </span>
+          </div>
             <div className="hidden md:flex items-center space-x-8">
               <a href="#features" className="text-text-primary hover:text-azul-claro transition">Características</a>
               <a href="#pricing" className="text-text-primary hover:text-azul-claro transition">Precios</a>
@@ -190,52 +191,49 @@ const AncloraCortex = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="bg-gradient-hero pt-20 pb-16 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-libre font-bold mb-6 leading-tight">
-              Potencia tu negocio con <span className="text-accent-warm">IA</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90 leading-relaxed">
-              Análisis inteligente para SaaS, e-commerce y negocios locales.
-              Descubre oportunidades ocultas y optimiza tu crecimiento con recomendaciones accionables.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => setShowAnalysis(true)}
-                className="bg-gradient-action px-8 py-4 rounded-anclora font-semibold text-lg text-negro-azulado hover:shadow-lg transition transform hover:-translate-y-1"
-              >
-                <FontAwesomeIcon icon={faRocket} className="mr-2" />
-                Analizar mi Negocio
-              </button>
-              <button className="border-2 border-white px-8 py-4 rounded-anclora font-semibold text-lg hover:bg-white hover:text-azul-principal transition">
-                <FontAwesomeIcon icon={faPlay} className="mr-2" />
-                Ver Demo
-              </button>
+      <section className="hero-section">
+        <div className="hero-container">
+          <h1 className="hero-title">
+            Potencia tu negocio con <span style={{color: 'var(--anclora-amber)'}}>IA</span>
+          </h1>
+          <p className="hero-subtitle">
+            Análisis inteligente para SaaS, e-commerce y negocios locales.
+            Descubre oportunidades ocultas y optimiza tu crecimiento con recomendaciones accionables.
+          </p>
+          <div className="hero-buttons">
+            <button
+              onClick={() => setShowAnalysis(true)}
+              className="btn-hero-primary"
+            >
+              <FontAwesomeIcon icon={faRocket} className="mr-2" />
+              Analizar mi Negocio
+            </button>
+            <button className="btn-hero-secondary">
+              <FontAwesomeIcon icon={faPlay} className="mr-2" />
+              Ver Demo
+            </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 bg-gris-claro">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-libre font-bold text-negro-azulado mb-4">
-              Características Principales
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Herramientas avanzadas de análisis diseñadas para impulsar tu negocio
-            </p>
-          </div>
+      <section id="features" className="section">
+        <div className="section-container">
+          <h2 className="section-title">
+            Características Principales
+          </h2>
+          <p className="section-subtitle">
+            Herramientas avanzadas de análisis diseñadas para impulsar tu negocio
+          </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="feature-card text-center bg-white rounded-card p-8 shadow-card border border-border-subtle">
-              <div className="w-16 h-16 bg-gradient-action rounded-full flex items-center justify-center mx-auto mb-6">
-                <FontAwesomeIcon icon={faChartLine} className="text-2xl text-negro-azulado" />
+            <div className="feature-card text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'var(--gradient-action)'}}>
+                <FontAwesomeIcon icon={faChartLine} className="text-2xl" style={{color: 'var(--text-inverse)'}} />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-negro-azulado">Análisis Predictivo</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>Análisis Predictivo</h3>
+              <p style={{color: 'var(--text-secondary)'}} className="leading-relaxed">
                 Predice tendencias y comportamientos futuros con algoritmos de machine learning avanzados.
               </p>
             </div>
