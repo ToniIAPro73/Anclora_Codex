@@ -162,30 +162,21 @@ const AncloraCortex = () => {
               Beta
             </span>
           </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-text-primary hover:text-azul-claro transition">Características</a>
-              <a href="#pricing" className="text-text-primary hover:text-azul-claro transition">Precios</a>
-              <button
-                onClick={() => setShowLogin(true)}
-                className="text-azul-claro hover:text-azul-principal transition font-medium"
-              >
-                Iniciar Sesión
-              </button>
-              <button
-                onClick={() => setShowSignup(true)}
-                className="bg-gradient-action text-negro-azulado px-6 py-2 rounded-anclora font-semibold hover:shadow-lg transition"
-              >
-                Comenzar Gratis
-              </button>
-            </div>
-            <div className="md:hidden flex items-center">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-text-primary"
-              >
-                <FontAwesomeIcon icon={faBars} className="text-xl" />
-              </button>
-            </div>
+          <div className="nav-links">
+            <a href="#features" className="nav-link">Características</a>
+            <a href="#pricing" className="nav-link">Precios</a>
+            <button
+              onClick={() => setShowLogin(true)}
+              className="nav-link"
+            >
+              Iniciar Sesión
+            </button>
+            <button
+              onClick={() => setShowSignup(true)}
+              className="btn-nav-primary"
+            >
+              Comenzar Gratis
+            </button>
           </div>
         </div>
       </nav>
@@ -212,7 +203,6 @@ const AncloraCortex = () => {
               <FontAwesomeIcon icon={faPlay} className="mr-2" />
               Ver Demo
             </button>
-            </div>
           </div>
         </div>
       </section>
