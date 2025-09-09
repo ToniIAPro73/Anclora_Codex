@@ -16,13 +16,12 @@ import {
   faPlay,
   faCog,
   faLightbulb,
-  faTrendingUp,
-  faTarget,
+  faBullseye,
   faEye,
   faArrowRight,
   faUpload,
   faFileAlt,
-  faMagic
+  faStar
 } from '@fortawesome/free-solid-svg-icons'
 import '../styles/AncloraCortex.css'
 
@@ -590,7 +589,7 @@ const AncloraCortex = () => {
                       >
                         {currentStep === 3 ? (
                           <>
-                            <FontAwesomeIcon icon={faMagic} className="mr-2" />
+                            <FontAwesomeIcon icon={faStar} className="mr-2" />
                             Analizar Negocio
                           </>
                         ) : (
@@ -617,7 +616,7 @@ const AncloraCortex = () => {
                 {/* KPIs */}
                 <div>
                   <h3 className="text-xl font-semibold text-negro-azulado mb-4 flex items-center">
-                    <FontAwesomeIcon icon={faTrendingUp} className="mr-2 text-azul-claro" />
+                    <FontAwesomeIcon icon={faChartLine} className="mr-2 text-azul-claro" />
                     Métricas Clave de Mejora
                   </h3>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -674,14 +673,14 @@ const AncloraCortex = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="bg-azul-claro bg-opacity-10 rounded-card p-6 border border-azul-claro border-opacity-20">
                     <h4 className="font-semibold text-negro-azulado mb-2 flex items-center">
-                      <FontAwesomeIcon icon={faTarget} className="mr-2 text-azul-claro" />
+                      <FontAwesomeIcon icon={faBullseye} className="mr-2 text-azul-claro" />
                       Timeline de Implementación
                     </h4>
                     <p className="text-gray-700">{analysisResult.timeline}</p>
                   </div>
                   <div className="bg-verde-suave bg-opacity-10 rounded-card p-6 border border-verde-suave border-opacity-20">
                     <h4 className="font-semibold text-negro-azulado mb-2 flex items-center">
-                      <FontAwesomeIcon icon={faTrendingUp} className="mr-2 text-verde-suave" />
+                      <FontAwesomeIcon icon={faChartLine} className="mr-2 text-verde-suave" />
                       ROI Estimado
                     </h4>
                     <p className="text-2xl font-bold text-verde-suave">{analysisResult.estimatedROI}</p>

@@ -10,6 +10,9 @@ COPY package*.json ./
 # Instala las dependencias
 RUN npm install
 
+# Instalar @tailwindcss/postcss para compatibilidad
+RUN npm install @tailwindcss/postcss
+
 # Copia el resto de la aplicación
 COPY . .
 
