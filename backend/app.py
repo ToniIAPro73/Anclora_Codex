@@ -118,130 +118,128 @@ def login():
     except Exception as e:
         return jsonify({'error': 'Invalid credentials', 'details': str(e)}), 401
 
-# Ruta para login social (Google)
-@app.route('/login/google', methods=['POST'])
-def login_google():
+# Ruta para análisis sin autenticación (demo)
+@app.route('/analyze-demo', methods=['POST'])
+def analyze_business_demo():
     try:
-        # Redireccionar a Google para autenticación
-        # En una implementación real, el frontend manejaría el flujo de OAuth
         data = request.get_json()
-        redirect_to = data.get('redirect_to', 'http://localhost:3000')
         
-        # Obtener URL de autenticación de Google
-        auth_url = supabase.auth.sign_in_with_oauth({
-            "provider": "google",
-            "options": {
-                "redirect_to": redirect_to
+        # Análisis simplificado para demo
+        business_type = data.get('business_type', 'startup')
+        business_name = data.get('business_name', 'Tu Negocio')
+        
+        # Generar análisis basado en tipo de negocio
+        if business_type == 'saas':
+            analysis_result = {
+                'business_type': 'saas',
+                'business_name': business_name,
+                'score': 75,
+                'summary': f"Análisis completado para {business_name}. Identificamos oportunidades clave para optimizar métricas de SaaS.",
+                'recommendations': [
+                    {
+                        'category': 'Reducción de Churn',
+                        'priority': 'Alta',
+                        'impact': '30% reducción en cancelaciones',
+                        'actions': [
+                            'Implementar sistema de alertas tempranas de churn',
+                            'Crear programa de customer success proactivo',
+                            'Desarrollar feature adoption tracking y nudges'
+                        ]
+                    },
+                    {
+                        'category': 'Crecimiento de MRR',
+                        'priority': 'Alta',
+                        'impact': '25% aumento en revenue mensual',
+                        'actions': [
+                            'Optimizar pricing basado en valor',
+                            'Implementar upselling automatizado',
+                            'Crear tiers premium con features avanzadas'
+                        ]
+                    }
+                ],
+                'kpis': [
+                    {'name': 'MRR Growth', 'current': '12%', 'target': '20%', 'improvement': '+67%'},
+                    {'name': 'Churn Rate', 'current': '7.2%', 'target': '4.5%', 'improvement': '-38%'},
+                    {'name': 'CAC Payback', 'current': '8.2 meses', 'target': '5.1 meses', 'improvement': '-38%'},
+                    {'name': 'NPS Score', 'current': '42', 'target': '65', 'improvement': '+55%'}
+                ],
+                'timeline': '3-6 meses para implementación completa',
+                'estimated_roi': '185%',
+                'is_demo': True,
+                'generated_at': datetime.datetime.utcnow().isoformat()
             }
-        })
-        
-        return jsonify({'auth_url': auth_url.url}), 200
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-# Ruta para solicitar restablecimiento de contraseña
-@app.route('/forgot-password', methods=['POST'])
-def forgot_password():
-    try:
-        data = request.get_json()
-        email = data.get('email')
-        
-        # Enviar email de restablecimiento
-        supabase.auth.reset_password_email(email)
-        
-        return jsonify({'message': 'Password reset email sent'}), 200
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-# Ruta para verificar código OTP de SMS
-@app.route('/verify-otp', methods=['POST'])
-def verify_otp():
-    try:
-        data = request.get_json()
-        phone = data.get('phone')
-        token = data.get('token')
-        
-        # Verificar OTP
-        session = supabase.auth.verify_otp({
-            "phone": phone,
-            "token": token,
-            "type": "sms"
-        })
-        
-        return jsonify({
-            'message': 'Phone number verified successfully',
-            'session': session
-        }), 200
-        
-    except Exception as e:
-        return jsonify({'error': 'Invalid OTP', 'details': str(e)}), 400
-
-# Ruta protegida para obtener perfil de usuario
-@app.route('/profile', methods=['GET'])
-@token_required
-def get_profile(current_user):
-    try:
-        # Obtener información del perfil desde Supabase
-        response = supabase.table('profiles').select('*').eq('id', current_user.id).execute()
-        
-        if response.data:
-            return jsonify({'profile': response.data[0]}), 200
+        elif business_type == 'ecommerce':
+            analysis_result = {
+                'business_type': 'ecommerce',
+                'business_name': business_name,
+                'score': 68,
+                'summary': f"Análisis completado para {business_name}. Identificamos oportunidades para optimizar conversiones y AOV.",
+                'recommendations': [
+                    {
+                        'category': 'Optimización de Conversión',
+                        'priority': 'Alta',
+                        'impact': '35% aumento en conversiones',
+                        'actions': [
+                            'Implementar abandoned cart recovery con secuencia de emails',
+                            'Optimizar checkout process reduciendo pasos a 2-3',
+                            'Agregar reviews y ratings prominentes en product pages'
+                        ]
+                    },
+                    {
+                        'category': 'Customer Experience',
+                        'priority': 'Alta',
+                        'impact': '40% aumento en repeat purchases',
+                        'actions': [
+                            'Implementar chatbot para soporte 24/7',
+                            'Crear programa de loyalty con rewards',
+                            'Personalizar product recommendations con ML'
+                        ]
+                    }
+                ],
+                'kpis': [
+                    {'name': 'Conversion Rate', 'current': '1.8%', 'target': '2.9%', 'improvement': '+61%'},
+                    {'name': 'Average Order Value', 'current': '$67', 'target': '$89', 'improvement': '+33%'},
+                    {'name': 'Cart Abandonment', 'current': '69%', 'target': '52%', 'improvement': '-25%'},
+                    {'name': 'Customer LTV', 'current': '$156', 'target': '$218', 'improvement': '+40%'}
+                ],
+                'timeline': '2-4 meses para implementación completa',
+                'estimated_roi': '165%',
+                'is_demo': True,
+                'generated_at': datetime.datetime.utcnow().isoformat()
+            }
         else:
-            return jsonify({'message': 'Profile not found'}), 404
-            
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-# Ruta para el proceso de análisis (protegida)
-@app.route('/analyze', methods=['POST'])
-@token_required
-def analyze_business(current_user):
-    try:
-        data = request.get_json()
-        
-        # Aquí iría la lógica para procesar el análisis con IA
-        # Por ahora, simulamos un análisis
-        analysis_result = {
-            "business_type": data.get("business_type"),
-            "summary": "Análisis completado con éxito",
-            "recommendations": [
-                "Optimizar landing page para mejorar la tasa de conversión",
-                "Implementar programa de referidos para adquirir clientes a menor costo",
-                "Ajustar estrategia de precios basado en análisis competitivo"
-            ],
-            "priority": "Alta",
-            "estimated_impact": "Aumento del 15-30% en conversiones"
-        }
-        
-        # Guardar el análisis en la base de datos
-        analysis_data = {
-            'user_id': current_user.id,
-            'business_data': data,
-            'result': analysis_result,
-            'created_at': datetime.datetime.utcnow().isoformat()
-        }
-        
-        supabase.table('analyses').insert(analysis_data).execute()
+            # Análisis genérico para otros tipos
+            analysis_result = {
+                'business_type': business_type,
+                'business_name': business_name,
+                'score': 68,
+                'summary': f"Análisis completado para {business_name}. Identificamos oportunidades de crecimiento.",
+                'recommendations': [
+                    {
+                        'category': 'Optimización Digital',
+                        'priority': 'Alta',
+                        'impact': '30% mejora en presencia online',
+                        'actions': [
+                            'Mejorar SEO y presencia online',
+                            'Implementar analytics y tracking',
+                            'Optimizar experiencia del cliente'
+                        ]
+                    }
+                ],
+                'kpis': [
+                    {'name': 'Crecimiento Revenue', 'current': '8%', 'target': '15%', 'improvement': '+88%'},
+                    {'name': 'Satisfacción Cliente', 'current': '7.2/10', 'target': '8.5/10', 'improvement': '+18%'}
+                ],
+                'timeline': '2-4 meses para implementación',
+                'estimated_roi': '165%',
+                'is_demo': True,
+                'generated_at': datetime.datetime.utcnow().isoformat()
+            }
         
         return jsonify(analysis_result), 200
         
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
-
-# Ruta para obtener historial de análisis del usuario
-@app.route('/analyses', methods=['GET'])
-@token_required
-def get_analyses(current_user):
-    try:
-        # Obtener análisis del usuario
-        response = supabase.table('analyses').select('*').eq('user_id', current_user.id).execute()
-        
-        return jsonify({'analyses': response.data}), 200
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'error': f'Error en el análisis demo: {str(e)}'}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)  
+    app.run(debug=True, host='0.0.0.0', port=5000)

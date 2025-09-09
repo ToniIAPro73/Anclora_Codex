@@ -8,11 +8,16 @@ services:
       - SUPABASE_KEY=${SUPABASE_KEY:-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5Z3l4cXZmbHZqZWVvbmlmaWFkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTczNTQwMDcsImV4cCI6MjA3MjkzMDAwN30.LiD0cCR1bdqV5knwzmD3DVIRnBj9ZG9lJT1GRayaJ4s}
       - SECRET_KEY=${SECRET_KEY:-d1d2b39b76a19ccb96d49f5ec3d5f720ccd1e37405317fb19301e0a67374e3f2}
       - DATABASE_URL=postgresql://anclora:password@db:5432/anclora_cortex
+      - N8N_WEBHOOK_URL=http://n8n:5678
+      - LLAMA_MODEL_PATH=/app/models/llama-2-7b-chat.gguf
     volumes:
       - ../backend:/app
+      - ./models:/app/models
     depends_on:
       - db
     restart: unless-stopped
+    networks:
+      - anclora-network
 
   frontend:
     build: ../frontend
@@ -21,9 +26,12 @@ services:
     environment:
       - REACT_APP_SUPABASE_URL=${SUPABASE_URL}
       - REACT_APP_SUPABASE_KEY=${SUPABASE_KEY}
+      - REACT_APP_API_URL=http://localhost:5000
     volumes:
       - ../frontend:/app
       - /app/node_modules
+    networks:
+      - anclora-network
 
   db:
     image: postgres:13
@@ -41,6 +49,45 @@ services:
       timeout: 10s
       retries: 3
     restart: unless-stopped
+    networks:
+      - anclora-network
+
+  # N8N Workflow Orchestration
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: anclora-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=anclora2025
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - GENERIC_TIMEZONE=Europe/Madrid
+      - N8N_METRICS=true
+      - N8N_LOG_LEVEL=info
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=db
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=anclora
+      - DB_POSTGRESDB_PASSWORD=password
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n/workflows:/home/node/.n8n/workflows
+    depends_on:
+      - db
+    networks:
+      - anclora-network
 
 volumes:
-  postgres_data:  
+  postgres_data:
+  n8n_data:
+
+networks:
+  anclora-network:
+    driver: bridge  

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  /* Paleta base Anclora - Exacta del Design System v5.0 */
+  /* Paleta base Anclora Press - Guía oficial */
   --azul-principal: #23436B;
   --azul-claro: #2EAFC4;
   --ambar-suave: #FFC979;
@@ -9,17 +9,36 @@
   --gris-claro: #F6F7F9;
   --blanco: #FFFFFF;
   
-  /* Colores adicionales del ecosistema */
+  /* Colores específicos Anclora Press */
+  --card-bg-light: #FFECB3;
+  --border-subtle: #E1E8ED;
+  --text-primary: #162032;
+  --accent-warm: #FFC979;
+  --verde-suave: #37B5A4;
+  --verde-claro: #D6F8E3;
   --azul-hero: #38BDF8;
-  --verde-guardian: #D6F8E3;
-  --gris-render: #37475A;
-  --teal-kairon: #37B5A4;
   
-  /* Degradados oficiales Anclora */
-  --gradient-hero: linear-gradient(120deg, #23436B 0%, #2EAFC4 100%);
+  /* Degradados oficiales Anclora Press */
+  --gradient-hero: linear-gradient(120deg, #23436B 0%, #38BDF8 100%);
   --gradient-action: linear-gradient(90deg, #2EAFC4 0%, #FFC979 100%);
   --gradient-subtle: linear-gradient(180deg, #F6F7F9 0%, #FFFFFF 100%);
-  --gradient-cortex: linear-gradient(120deg, #23436B 0%, #2EAFC4 100%);
+  --gradient-press: linear-gradient(120deg, #FFC979 70%, #FFECB3 100%);
+  
+  /* Sistema de espaciado 8pt */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-2xl: 64px;
+  
+  /* Border radius sistema */
+  --radius-base: 12px;
+  --radius-card: 20px;
+  
+  /* Sombras Anclora */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 body {

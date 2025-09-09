@@ -1,0 +1,68 @@
+{
+  "name": "Anclora Cortex - Análisis de Negocio con IA",
+  "short_name": "Anclora Cortex",
+  "description": "Plataforma de análisis de negocio con IA para SaaS, e-commerce y negocios locales",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#23436B",
+  "theme_color": "#2EAFC4",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "analytics"],
+  "lang": "es",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2323436B' rx='20'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='%23FFC979'>⚓</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2323436B' rx='20'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='%23FFC979'>⚓</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 844'><rect width='390' height='844' fill='%23F6F7F9'/><rect width='390' height='200' fill='url(%23gradient)'/><defs><linearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2323436B'/><stop offset='100%25' stop-color='%2338BDF8'/></linearGradient></defs><text x='195' y='100' font-size='24' text-anchor='middle' fill='white' font-family='serif'>Anclora Cortex</text><text x='195' y='130' font-size='14' text-anchor='middle' fill='white' opacity='0.9'>Análisis de Negocio con IA</text></svg>",
+      "sizes": "390x844",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nuevo Análisis",
+      "short_name": "Analizar",
+      "description": "Crear un nuevo análisis de negocio",
+      "url": "/?action=analyze",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232EAFC4'><path d='M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H18V0h-2v2H8V0H6v2H4.5C3.12 2 2 3.12 2 4.5v15C2 20.88 3.12 22 4.5 22h15c1.38 0 2.5-1.12 2.5-2.5v-15C22 3.12 20.88 2 19.5 2z'/></svg>",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Mis Análisis",
+      "short_name": "Historial",
+      "description": "Ver análisis anteriores",
+      "url": "/?action=history",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFC979'><path d='M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z'/></svg>",
+          "sizes": "96x96",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
+}

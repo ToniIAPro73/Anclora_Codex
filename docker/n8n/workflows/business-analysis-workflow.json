@@ -1,0 +1,290 @@
+{
+  "name": "Anclora Cortex - Business Analysis Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "analyze-business",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Business Analysis Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "webhookId": "business-analysis"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Validar datos de entrada\nconst businessData = $json.body;\n\n// Validaciones básicas\nif (!businessData.business_type) {\n  return [{\n    json: {\n      error: 'business_type es requerido',\n      status: 400\n    }\n  }];\n}\n\nif (!businessData.business_name) {\n  return [{\n    json: {\n      error: 'business_name es requerido',\n      status: 400\n    }\n  }];\n}\n\n// Enriquecer datos\nconst enrichedData = {\n  ...businessData,\n  timestamp: new Date().toISOString(),\n  workflow_id: $workflow.id,\n  analysis_id: `analysis_${Date.now()}`\n};\n\nreturn [{\n  json: enrichedData\n}];"
+      },
+      "id": "validate-data",
+      "name": "Validate & Enrich Data",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://backend:5000/analyze-demo",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "business_type",
+              "value": "={{$json.business_type}}"
+            },
+            {
+              "name": "business_name", 
+              "value": "={{$json.business_name}}"
+            },
+            {
+              "name": "description",
+              "value": "={{$json.description}}"
+            },
+            {
+              "name": "current_challenges",
+              "value": "={{$json.current_challenges}}"
+            },
+            {
+              "name": "goals",
+              "value": "={{$json.goals}}"
+            },
+            {
+              "name": "website",
+              "value": "={{$json.website}}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ai-analysis",
+      "name": "AI Analysis Service",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Procesar resultado del análisis\nconst analysisResult = $json;\n\n// Agregar metadatos adicionales\nconst processedResult = {\n  ...analysisResult,\n  processed_at: new Date().toISOString(),\n  workflow_version: '1.0.0',\n  processing_time: Date.now() - new Date($('validate-data').first().json.timestamp).getTime()\n};\n\n// Generar insights adicionales\nif (analysisResult.score) {\n  if (analysisResult.score >= 80) {\n    processedResult.performance_level = 'Excelente';\n    processedResult.priority_message = 'Tu negocio está en muy buena forma. Enfócate en optimizaciones menores.';\n  } else if (analysisResult.score >= 60) {\n    processedResult.performance_level = 'Bueno';\n    processedResult.priority_message = 'Hay oportunidades claras de mejora. Prioriza las recomendaciones de alta prioridad.';\n  } else {\n    processedResult.performance_level = 'Necesita Mejoras';\n    processedResult.priority_message = 'Tu negocio tiene potencial significativo. Implementa las recomendaciones urgentemente.';\n  }\n}\n\nreturn [{\n  json: processedResult\n}];"
+      },
+      "id": "process-results",
+      "name": "Process Analysis Results",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [900, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.business_type}}",
+              "operation": "equal",
+              "value2": "saas"
+            }
+          ]
+        }
+      },
+      "id": "check-business-type",
+      "name": "Check Business Type",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1120, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Recomendaciones específicas para SaaS\nconst data = $json;\n\n// Agregar recomendaciones específicas de SaaS\nconst saasRecommendations = {\n  ...data,\n  saas_specific_insights: {\n    key_metrics_focus: ['MRR', 'Churn Rate', 'CAC', 'LTV'],\n    recommended_tools: [\n      'Mixpanel para analytics de producto',\n      'Intercom para customer success',\n      'ChartMogul para métricas de SaaS',\n      'Hotjar para análisis de UX'\n    ],\n    growth_tactics: [\n      'Implementar product-led growth',\n      'Optimizar onboarding flow',\n      'Crear programa de referidos',\n      'Desarrollar customer health score'\n    ]\n  }\n};\n\nreturn [{\n  json: saasRecommendations\n}];"
+      },
+      "id": "saas-specific",
+      "name": "SaaS Specific Recommendations",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1340, 200]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Recomendaciones generales para otros tipos de negocio\nconst data = $json;\n\n// Agregar recomendaciones generales\nconst generalRecommendations = {\n  ...data,\n  general_insights: {\n    digital_transformation: [\n      'Mejorar presencia online',\n      'Implementar analytics',\n      'Optimizar para móvil',\n      'Crear contenido de valor'\n    ],\n    customer_focus: [\n      'Implementar CRM',\n      'Crear programa de loyalty',\n      'Mejorar customer service',\n      'Recopilar feedback regularmente'\n    ]\n  }\n};\n\nreturn [{\n  json: generalRecommendations\n}];"
+      },
+      "id": "general-recommendations",
+      "name": "General Recommendations",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [1340, 400]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll"
+      },
+      "id": "merge-results",
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [1560, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{$json}}"
+      },
+      "id": "webhook-response",
+      "name": "Send Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1780, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://backend:5000/store-analysis",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "analysis_data",
+              "value": "={{JSON.stringify($json)}}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "store-analysis",
+      "name": "Store Analysis (Optional)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1560, 500]
+    }
+  ],
+  "connections": {
+    "Business Analysis Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate & Enrich Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate & Enrich Data": {
+      "main": [
+        [
+          {
+            "node": "AI Analysis Service",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Analysis Service": {
+      "main": [
+        [
+          {
+            "node": "Process Analysis Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Analysis Results": {
+      "main": [
+        [
+          {
+            "node": "Check Business Type",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Business Type": {
+      "main": [
+        [
+          {
+            "node": "SaaS Specific Recommendations",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "General Recommendations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SaaS Specific Recommendations": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "General Recommendations": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Results": {
+      "main": [
+        [
+          {
+            "node": "Send Response",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Store Analysis (Optional)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "versionId": "1.0.0",
+  "id": "business-analysis-workflow",
+  "meta": {
+    "instanceId": "anclora-cortex"
+  }
+}

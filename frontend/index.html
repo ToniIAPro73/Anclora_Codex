@@ -2,14 +2,66 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚓</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#23436B" />
-    <meta name="description" content="Anclora Cortex: Análisis de negocio con IA para SaaS, e-commerce y negocios locales. Parte del ecosistema Anclora." />
+    <meta name="theme-color" content="#2EAFC4" />
+    <meta name="description" content="Anclora Cortex: Plataforma de análisis de negocio con IA para SaaS, e-commerce y negocios locales" />
+    <meta name="keywords" content="análisis de negocio, IA, SaaS, e-commerce, negocio local, optimización, crecimiento" />
+    <meta name="author" content="Anclora" />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="application-name" content="Anclora Cortex" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Anclora Cortex" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-TileColor" content="#23436B" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Anclora Cortex - Análisis de Negocio con IA" />
+    <meta property="og:description" content="Potencia tu negocio con análisis inteligente para SaaS, e-commerce y negocios locales" />
+    <meta property="og:site_name" content="Anclora Cortex" />
+    <meta property="og:url" content="https://cortex.anclora.com" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Anclora Cortex - Análisis de Negocio con IA" />
+    <meta name="twitter:description" content="Potencia tu negocio con análisis inteligente" />
+    
     <title>Anclora Cortex - Análisis de Negocio con IA</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%2323436B%22 rx=%2220%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23FFC979%22>⚓</text></svg>" />
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%2323436B%22 rx=%2220%22/><text x=%2250%22 y=%2270%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23FFC979%22>⚓</text></svg>" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
