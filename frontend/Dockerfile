@@ -10,18 +10,11 @@ COPY package*.json ./
 # Instala las dependencias
 RUN npm install
 
-# Instalar @tailwindcss/postcss para compatibilidad
-RUN npm install @tailwindcss/postcss
-
 # Copia el resto de la aplicación
 COPY . .
-
-# Construye la aplicación para producción
-RUN npm run build
 
 # Expone el puerto 3000
 EXPOSE 3000
 
-# Sirve la aplicación con un servidor estático (puedes usar serve)
-RUN npm install -g serve
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# Ejecuta en modo desarrollo
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
