@@ -42,6 +42,8 @@ const AncloraCortex = () => {
   const [analysisResult, setAnalysisResult] = useState(null)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [user, setUser] = useState(null)
+  const [selectedFeature, setSelectedFeature] = useState(null)
+  const [selectedBusinessType, setSelectedBusinessType] = useState(null)
 
   // Análisis con IA usando agentes especializados
   const performAnalysis = async () => {
@@ -151,8 +153,6 @@ const AncloraCortex = () => {
 
   return (
     <div className="anclora-cortex min-h-screen">
-      {/* Theme Selector */}
-      <ThemeSelector />
       {/* Navigation */}
       <nav>
         <div className="nav-container">
@@ -176,6 +176,15 @@ const AncloraCortex = () => {
               className="btn-nav-primary"
             >
               Comenzar Gratis
+            </button>
+            <ThemeSelector />
+          </div>
+          <div className="mobile-nav">
+            <button
+              onClick={() => setShowSignup(true)}
+              className="mobile-cta-btn"
+            >
+              Comenzar
             </button>
           </div>
         </div>
@@ -218,32 +227,41 @@ const AncloraCortex = () => {
           </p>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="feature-card text-center">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'var(--gradient-action)'}}>
-                <FontAwesomeIcon icon={faChartLine} className="text-2xl" style={{color: 'var(--text-inverse)'}} />
+            <div 
+              className={`feature-card text-center ${selectedFeature === 'predictive' ? 'selected' : ''}`}
+              onClick={() => setSelectedFeature(selectedFeature === 'predictive' ? null : 'predictive')}
+            >
+              <div className="feature-icon-container">
+                <FontAwesomeIcon icon={faChartLine} className="feature-icon" />
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>Análisis Predictivo</h3>
-              <p style={{color: 'var(--text-secondary)'}} className="leading-relaxed">
+              <h3 className="feature-title">Análisis Predictivo</h3>
+              <p className="feature-description">
                 Predice tendencias y comportamientos futuros con algoritmos de machine learning avanzados.
               </p>
             </div>
 
-            <div className="feature-card text-center">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'var(--gradient-action)'}}>
-                <FontAwesomeIcon icon={faBrain} className="text-2xl" style={{color: 'var(--text-inverse)'}} />
+            <div 
+              className={`feature-card text-center ${selectedFeature === 'conversational' ? 'selected' : ''}`}
+              onClick={() => setSelectedFeature(selectedFeature === 'conversational' ? null : 'conversational')}
+            >
+              <div className="feature-icon-container">
+                <FontAwesomeIcon icon={faBrain} className="feature-icon" />
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>IA Conversacional</h3>
-              <p style={{color: 'var(--text-secondary)'}} className="leading-relaxed">
+              <h3 className="feature-title">IA Conversacional</h3>
+              <p className="feature-description">
                 Interactúa con tus datos usando lenguaje natural y obtén insights instantáneos.
               </p>
             </div>
 
-            <div className="feature-card text-center">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'var(--gradient-action)'}}>
-                <FontAwesomeIcon icon={faShieldAlt} className="text-2xl" style={{color: 'var(--text-inverse)'}} />
+            <div 
+              className={`feature-card text-center ${selectedFeature === 'security' ? 'selected' : ''}`}
+              onClick={() => setSelectedFeature(selectedFeature === 'security' ? null : 'security')}
+            >
+              <div className="feature-icon-container">
+                <FontAwesomeIcon icon={faShieldAlt} className="feature-icon" />
               </div>
-              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>Seguridad Avanzada</h3>
-              <p style={{color: 'var(--text-secondary)'}} className="leading-relaxed">
+              <h3 className="feature-title">Seguridad Avanzada</h3>
+              <p className="feature-description">
                 Protección de datos de nivel empresarial con encriptación end-to-end.
               </p>
             </div>
@@ -264,26 +282,35 @@ const AncloraCortex = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8 rounded-card hover:shadow-card transition bg-card-bg-light">
-              <FontAwesomeIcon icon={faUsers} className="text-5xl text-azul-claro mb-6" />
-              <h3 className="text-2xl font-semibold mb-4 text-negro-azulado">SaaS</h3>
-              <p className="text-gray-700 leading-relaxed">
+            <div 
+              className={`business-type-card ${selectedBusinessType === 'saas' ? 'selected' : ''}`}
+              onClick={() => setSelectedBusinessType(selectedBusinessType === 'saas' ? null : 'saas')}
+            >
+              <FontAwesomeIcon icon={faUsers} className="business-type-icon" />
+              <h3 className="business-type-title">SaaS</h3>
+              <p className="business-type-description">
                 Optimiza métricas clave, reduce churn y acelera el crecimiento de tu software como servicio.
               </p>
             </div>
 
-            <div className="text-center p-8 rounded-card hover:shadow-card transition bg-card-bg-light">
-              <FontAwesomeIcon icon={faStore} className="text-5xl text-azul-claro mb-6" />
-              <h3 className="text-2xl font-semibold mb-4 text-negro-azulado">E-commerce</h3>
-              <p className="text-gray-700 leading-relaxed">
+            <div 
+              className={`business-type-card ${selectedBusinessType === 'ecommerce' ? 'selected' : ''}`}
+              onClick={() => setSelectedBusinessType(selectedBusinessType === 'ecommerce' ? null : 'ecommerce')}
+            >
+              <FontAwesomeIcon icon={faStore} className="business-type-icon" />
+              <h3 className="business-type-title">E-commerce</h3>
+              <p className="business-type-description">
                 Aumenta conversiones, optimiza inventario y mejora la experiencia del cliente.
               </p>
             </div>
 
-            <div className="text-center p-8 rounded-card hover:shadow-card transition bg-card-bg-light">
-              <FontAwesomeIcon icon={faBuilding} className="text-5xl text-azul-claro mb-6" />
-              <h3 className="text-2xl font-semibold mb-4 text-negro-azulado">Negocio Local</h3>
-              <p className="text-gray-700 leading-relaxed">
+            <div 
+              className={`business-type-card ${selectedBusinessType === 'local' ? 'selected' : ''}`}
+              onClick={() => setSelectedBusinessType(selectedBusinessType === 'local' ? null : 'local')}
+            >
+              <FontAwesomeIcon icon={faBuilding} className="business-type-icon" />
+              <h3 className="business-type-title">Negocio Local</h3>
+              <p className="business-type-description">
                 Atrae más clientes locales y optimiza operaciones con insights basados en datos.
               </p>
             </div>
@@ -399,16 +426,48 @@ const AncloraCortex = () => {
       {/* Footer */}
       <footer className="footer-section">
         <div className="footer-container">
-          <div className="footer-content">
-            <div className="footer-logo">⚓ Anclora Cortex</div>
-            <p className="footer-description">
-              Potenciando negocios con inteligencia artificial
-            </p>
-            <div className="footer-divider">
-              <p className="footer-copyright">
-                © 2025 Anclora Cortex. Todos los derechos reservados.
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <div className="footer-logo">⚓ Anclora Cortex</div>
+              <p className="footer-description">
+                Potenciando negocios con inteligencia artificial
               </p>
             </div>
+            
+            <div className="footer-links">
+              <div className="footer-column">
+                <h4 className="footer-column-title">Producto</h4>
+                <ul className="footer-link-list">
+                  <li><a href="#features" className="footer-link">Características</a></li>
+                  <li><a href="#pricing" className="footer-link">Precios</a></li>
+                  <li><a href="#" className="footer-link">Análisis IA</a></li>
+                </ul>
+              </div>
+              
+              <div className="footer-column">
+                <h4 className="footer-column-title">Empresa</h4>
+                <ul className="footer-link-list">
+                  <li><a href="#" className="footer-link">Acerca de</a></li>
+                  <li><a href="#" className="footer-link">Blog</a></li>
+                  <li><a href="#" className="footer-link">Contacto</a></li>
+                </ul>
+              </div>
+              
+              <div className="footer-column">
+                <h4 className="footer-column-title">Soporte</h4>
+                <ul className="footer-link-list">
+                  <li><a href="#" className="footer-link">Ayuda</a></li>
+                  <li><a href="#" className="footer-link">Documentación</a></li>
+                  <li><a href="#" className="footer-link">Estado</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div className="footer-bottom">
+            <p className="footer-copyright">
+              © 2025 Anclora Cortex. Todos los derechos reservados.
+            </p>
           </div>
         </div>
       </footer>
