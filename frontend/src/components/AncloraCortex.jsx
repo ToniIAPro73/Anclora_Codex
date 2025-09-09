@@ -158,7 +158,7 @@ const AncloraCortex = () => {
         <div className="nav-container">
           <div className="nav-logo">
             ⚓ Anclora Cortex
-            <span className="ml-2 text-sm px-2 py-1 rounded-full font-medium" style={{background: 'var(--anclora-amber)', color: 'var(--anclora-navy)'}}>
+            <span className="beta-badge">
               Beta
             </span>
           </div>
@@ -228,22 +228,22 @@ const AncloraCortex = () => {
               </p>
             </div>
 
-            <div className="feature-card text-center bg-white rounded-card p-8 shadow-card border border-border-subtle">
-              <div className="w-16 h-16 bg-gradient-action rounded-full flex items-center justify-center mx-auto mb-6">
-                <FontAwesomeIcon icon={faBrain} className="text-2xl text-negro-azulado" />
+            <div className="feature-card text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'var(--gradient-action)'}}>
+                <FontAwesomeIcon icon={faBrain} className="text-2xl" style={{color: 'var(--text-inverse)'}} />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-negro-azulado">IA Conversacional</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>IA Conversacional</h3>
+              <p style={{color: 'var(--text-secondary)'}} className="leading-relaxed">
                 Interactúa con tus datos usando lenguaje natural y obtén insights instantáneos.
               </p>
             </div>
 
-            <div className="feature-card text-center bg-white rounded-card p-8 shadow-card border border-border-subtle">
-              <div className="w-16 h-16 bg-gradient-action rounded-full flex items-center justify-center mx-auto mb-6">
-                <FontAwesomeIcon icon={faShieldAlt} className="text-2xl text-negro-azulado" />
+            <div className="feature-card text-center">
+              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{background: 'var(--gradient-action)'}}>
+                <FontAwesomeIcon icon={faShieldAlt} className="text-2xl" style={{color: 'var(--text-inverse)'}} />
               </div>
-              <h3 className="text-xl font-semibold mb-4 text-negro-azulado">Seguridad Avanzada</h3>
-              <p className="text-gray-600 leading-relaxed">
+              <h3 className="text-xl font-semibold mb-4" style={{color: 'var(--text-primary)'}}>Seguridad Avanzada</h3>
+              <p style={{color: 'var(--text-secondary)'}} className="leading-relaxed">
                 Protección de datos de nivel empresarial con encriptación end-to-end.
               </p>
             </div>
@@ -252,13 +252,13 @@ const AncloraCortex = () => {
       </section>
 
       {/* Business Types Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-libre font-bold text-negro-azulado mb-4">
+      <section className="business-types-section">
+        <div className="section-container">
+          <div className="section-header">
+            <h2 className="section-title">
               Perfecto para tu tipo de negocio
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="section-subtitle">
               Análisis especializado para cada industria
             </p>
           </div>
@@ -292,13 +292,13 @@ const AncloraCortex = () => {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 bg-gris-claro">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-libre font-bold text-negro-azulado mb-4">
+      <section id="pricing" className="pricing-section">
+        <div className="section-container">
+          <div className="section-header">
+            <h2 className="section-title">
               Planes que se adaptan a ti
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="section-subtitle">
               Comienza gratis y escala según tus necesidades
             </p>
           </div>
@@ -397,15 +397,15 @@ const AncloraCortex = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-negro-azulado text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="text-2xl font-libre font-bold mb-4">⚓ Anclora Cortex</div>
-            <p className="text-gray-400 mb-8">
+      <footer className="footer-section">
+        <div className="footer-container">
+          <div className="footer-content">
+            <div className="footer-logo">⚓ Anclora Cortex</div>
+            <p className="footer-description">
               Potenciando negocios con inteligencia artificial
             </p>
-            <div className="border-t border-gray-700 pt-8">
-              <p className="text-gray-400">
+            <div className="footer-divider">
+              <p className="footer-copyright">
                 © 2025 Anclora Cortex. Todos los derechos reservados.
               </p>
             </div>
