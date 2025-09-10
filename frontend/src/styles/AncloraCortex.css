@@ -125,7 +125,7 @@ body {
 }
 
 .pricing-card.popular {
-  border-color: var(--azul-claro);
+  border: none;
   transform: scale(1.05);
   box-shadow: 0 10px 30px rgba(46, 175, 196, 0.2);
 }
@@ -137,6 +137,27 @@ body {
 
 .pricing-card.popular:hover {
   transform: scale(1.05) translateY(-5px);
+}
+
+
+.pricing-card.selected {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(46, 175, 196, 0.4);
+  border: 3px solid var(--azul-claro);
+  position: relative;
+}
+
+.pricing-card.selected::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, var(--azul-claro), var(--ambar-suave));
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.8;
 }
 
 /* Animaciones suaves */
@@ -167,6 +188,24 @@ body {
 .btn-anclora:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(46, 175, 196, 0.4);
+}
+
+/* Header button gradient */
+.btn-nav-primary {
+  background: var(--gradient-action);
+  color: var(--negro-azulado);
+  border: none;
+  border-radius: 12px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(46, 175, 196, 0.3);
+}
+
+.btn-nav-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(46, 175, 196, 0.4);
 }
 
 /* Responsive adjustments */
@@ -205,4 +244,37 @@ input:focus {
 /* Modal backdrop */
 .modal-backdrop {
   backdrop-filter: blur(4px);
+}
+
+/* Dark mode styles */
+[data-theme="dark"] {
+  --azul-principal: #4A90E2;
+  --azul-claro: #5BA0F2;
+  --ambar-suave: #FFD700;
+  --negro-azulado: #F0F0F0;
+  --gris-claro: #2A2A2A;
+  --blanco: #1A1A1A;
+  --card-bg-light: #3A3A3A;
+  --border-subtle: #555555;
+  --text-primary: #F0F0F0;
+  --accent-warm: #FFD700;
+  --verde-suave: #4ADE80;
+  --verde-claro: #2D5A3D;
+  --azul-hero: #60A5FA;
+  --gradient-hero: linear-gradient(120deg, #4A90E2 0%, #60A5FA 100%);
+  --gradient-action: linear-gradient(90deg, #5BA0F2 0%, #FFD700 100%);
+  --gradient-subtle: linear-gradient(180deg, #2A2A2A 0%, #1A1A1A 100%);
+  --gradient-press: linear-gradient(120deg, #FFD700 70%, #3A3A3A 100%);
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.3);
+  --shadow-hover: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] body {
+  background-color: var(--blanco);
+  color: var(--negro-azulado);
+}
+
+/* Dark mode button text legibility */
+[data-theme="dark"] .pricing-card button {
+  color: var(--blanco) !important;
 }

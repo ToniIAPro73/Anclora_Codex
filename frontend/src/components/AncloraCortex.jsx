@@ -44,6 +44,7 @@ const AncloraCortex = () => {
   const [user, setUser] = useState(null)
   const [selectedFeature, setSelectedFeature] = useState(null)
   const [selectedBusinessType, setSelectedBusinessType] = useState(null)
+  const [selectedPlans, setSelectedPlans] = useState([])
 
   // Análisis con IA usando agentes especializados
   const performAnalysis = async () => {
@@ -149,6 +150,10 @@ const AncloraCortex = () => {
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
+  }
+
+  const handlePlanSelection = (planName) => {
+    setSelectedPlans([planName])
   }
 
   return (
@@ -332,7 +337,14 @@ const AncloraCortex = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Plan Básico */}
-            <div className="pricing-card bg-white rounded-card p-8 shadow-card border border-border-subtle">
+            <div
+              className={`pricing-card bg-white rounded-card p-8 shadow-card cursor-pointer transition-all duration-300 ${
+                selectedPlans.includes('basico')
+                  ? 'selected'
+                  : 'hover:shadow-lg'
+              }`}
+              onClick={() => handlePlanSelection('basico')}
+            >
               <h3 className="text-2xl font-semibold mb-4 text-negro-azulado">Básico</h3>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-negro-azulado">$0</span>
@@ -352,15 +364,22 @@ const AncloraCortex = () => {
                   <span className="text-gray-700">Soporte por email</span>
                 </li>
               </ul>
-              <button className="w-full border-2 border-azul-principal text-azul-principal py-3 rounded-anclora font-semibold hover:bg-azul-principal hover:text-white transition">
+              <button className="w-full bg-gradient-to-r from-azul-claro to-ambar-suave text-negro-azulado py-4 px-6 rounded-anclora font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-azul-principal">
                 Comenzar Gratis
               </button>
             </div>
 
             {/* Plan Pro */}
-            <div className="pricing-card popular bg-white rounded-card p-8 shadow-card relative border-2 border-azul-claro">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-azul-claro text-white px-4 py-1 rounded-full text-sm font-semibold">
-                Más Popular
+            <div
+              className={`pricing-card popular bg-white rounded-card p-8 shadow-card relative cursor-pointer transition-all duration-300 ${
+                selectedPlans.includes('pro')
+                  ? 'selected'
+                  : 'hover:shadow-lg'
+              }`}
+              onClick={() => handlePlanSelection('pro')}
+            >
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-azul-claro text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
+                ⭐ Más Popular
               </div>
               <h3 className="text-2xl font-semibold mb-4 text-negro-azulado">Pro</h3>
               <div className="mb-6">
@@ -385,13 +404,20 @@ const AncloraCortex = () => {
                   <span className="text-gray-700">Soporte prioritario</span>
                 </li>
               </ul>
-              <button className="w-full bg-gradient-action text-negro-azulado py-3 rounded-anclora font-semibold hover:shadow-lg transition">
+              <button className="w-full bg-gradient-to-r from-azul-claro to-ambar-suave text-negro-azulado py-4 px-6 rounded-anclora font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-azul-principal">
                 Comenzar Prueba
               </button>
             </div>
 
             {/* Plan Enterprise */}
-            <div className="pricing-card bg-white rounded-card p-8 shadow-card border border-border-subtle">
+            <div
+              className={`pricing-card bg-white rounded-card p-8 shadow-card cursor-pointer transition-all duration-300 ${
+                selectedPlans.includes('enterprise')
+                  ? 'selected'
+                  : 'hover:shadow-lg'
+              }`}
+              onClick={() => handlePlanSelection('enterprise')}
+            >
               <h3 className="text-2xl font-semibold mb-4 text-negro-azulado">Enterprise</h3>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-negro-azulado">$199</span>
@@ -415,7 +441,7 @@ const AncloraCortex = () => {
                   <span className="text-gray-700">SLA garantizado</span>
                 </li>
               </ul>
-              <button className="w-full border-2 border-azul-principal text-azul-principal py-3 rounded-anclora font-semibold hover:bg-azul-principal hover:text-white transition">
+              <button className="w-full bg-gradient-to-r from-azul-principal to-azul-claro text-white py-4 px-6 rounded-anclora font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-azul-claro">
                 Contactar Ventas
               </button>
             </div>
