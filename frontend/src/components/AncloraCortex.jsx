@@ -501,7 +501,7 @@ const AncloraCortex = () => {
       {/* Modal de Análisis */}
       {showAnalysis && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 modal-backdrop">
-          <div className="bg-white rounded-card p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="modal-content p-8 max-w-4xl w-full">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-3xl font-libre font-bold text-negro-azulado">
                 {analysisResult ? 'Resultados del Análisis' : 'Análisis de Negocio'}
